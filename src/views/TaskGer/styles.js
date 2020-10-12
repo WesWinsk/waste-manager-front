@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Container = styled.div`
     width: 100%;
     display: flex;
@@ -63,5 +64,29 @@ export const TextArea = styled.div`
         font-size: 20px;
         font-weight: bold;
         padding: 5px;
+    }
+`
+
+
+
+export const ButtomArea= styled.div`
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    
+    
+
+    button{
+        width:  140px;
+        height: 30px;
+        background: #065E12;
+        color: #FFF;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 10px;
+        &:hover{
+            color: #171253;
+        }
+            
     }
 `

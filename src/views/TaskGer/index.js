@@ -29,10 +29,16 @@ function TaskGer() {
         </S.Input>
         <S.TextArea>
           <span>Descrição</span>
-          <textarea></textarea>
+          <textarea rows={7} placeholder=" Atual estado do material descartado"/>
         </S.TextArea>
       </S.InputArea>
-      
+     
+
+
+      <S.ButtomArea>
+        <button href="#" id = "cancelar">Cancelar</button>
+        <button href="#" id = "salvar">Salvar</button>
+      </S.ButtomArea>
         
       
       <Footer/>
