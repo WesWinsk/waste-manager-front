@@ -27,6 +27,10 @@ function TaskGer() {
             <input></input>
             
         </S.Input>
+        <S.TextArea>
+          <span>Descrição</span>
+          <textarea></textarea>
+        </S.TextArea>
       </S.InputArea>
       
         

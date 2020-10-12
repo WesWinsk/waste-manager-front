@@ -52,3 +52,16 @@ export const Input = styled.div`
         padding: 5px;
     }
 `
+
+export const TextArea = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    margin-top: 20px;
+    span{
+        color: #171253;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 5px;
+    }
+`
