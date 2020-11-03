@@ -10,6 +10,7 @@ export const CollectorArea = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 50px;    
+    margin-bottom: 70px;
 
 `
 

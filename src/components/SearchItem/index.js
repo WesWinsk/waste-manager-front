@@ -7,19 +7,23 @@ import search from '../../Assets/Search.png'
 import info from '../../Assets/info.png'
 import trash from '../../Assets/trash.png'
 
-const SearchList = () => {
+
+
+
+
+const SearchList = ( { material, quantity, deleteFunction } ) => {
   return (
     <Container>
       <S.SimbolName>
         <img src={search} alt="Busca"/>
-        <h2> Latão - 10kg </h2>
+        <h2> {material} - {quantity}kg </h2>
       </S.SimbolName>
       <S.Info>
         <a href = "#" id = "info">
          <img src={info} alt="Informações"/>
         </a>
       </S.Info>
-      <S.Delete>
+      <S.Delete onClick = { deleteFunction } >
         <a href = "#" id = "delete">
           <img src={trash} alt="Informações"/>
         </a>

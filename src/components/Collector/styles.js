@@ -18,9 +18,9 @@ export const Container = styled.div `
 export const Tittle = styled.div `
     
     
-    color: #171253;
+    color: #FFF;
     font-weight: bold;
-    font-size: 23px;
+    font-size: 20px;
     background: #065E12;
     padding: 5px 5px;
     padding-bottom: 20px;
@@ -69,5 +69,18 @@ export const nivelCap = styled.div `
     background: #FFF;
     align-self: center ;
     padding-top: 10px;
+    
+    
+   
+`
+
+export const nivelCap2 = styled.div `
+    
+    width: 120px;
+    height: 50px;
+    background: #FFF5;
+    align-self: center ;
+    padding-top: 10px;
+    position: fixed;
    
 `

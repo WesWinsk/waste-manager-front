@@ -1,10 +1,11 @@
 import React from 'react';
 import * as S from './styles'
+import {Link} from 'react-router-dom';
 
 import logo from '../../Assets/Logo.png';
 import bell from '../../Assets/bell.png';
 
-function Header() {
+function Header( {notifyCount}) {
   return (
     <S.Container>
       <S.LeftSide>
@@ -15,12 +16,18 @@ function Header() {
         <span className="dividir"/>
         <a href = "#">MINHA CONTA</a>
         <span className="dividir"/>
-        <a href = "#">SAIR</a>
+        <Link to = "/">SAIR</Link>
+
+        {
+          notifyCount &&
+        <>
         <span className="dividir"/>
-        <a href = "#" id = "notification">
+        <Link to  = "/homeger/noteger" id = "notification">
           <img src={bell} alt="Notificação"/>
-          <span>5</span>
-        </a>
+          <span>{notifyCount}</span>
+        </Link>
+        </>    
+      }
       </S.RightSide>
     </S.Container>
   )

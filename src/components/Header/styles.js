@@ -5,8 +5,8 @@ export const Container = styled.div `
     height: 70px;
     background: #065E12;
     border-bottom: 5px solid #171253;
-
     display: flex; 
+    
 `
 export const LeftSide = styled.div `
     width: 50%;

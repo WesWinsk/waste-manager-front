@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styles';
+import api from '../../services/api';
+import {Link} from 'react-router-dom';
 
 //NOSSOS COMPONENTES
 import Header from '../../components/Header';
@@ -9,6 +11,33 @@ import SearchItem from '../../components/SearchItem';
 import addSearch from '../../Assets/AddSearch.png'
 
 function HomeComp() {
+  const [tasks, setTasks] = useState([]);
+
+  const idUser= localStorage.getItem('userId');
+
+
+  async function loadTasks(){
+    await api.get(`/searchs/${idUser}` )
+    .then(response => {
+      setTasks(response.data)
+     
+    })
+  }
+
+  async function deleteSearch(searchId){
+    await api.delete(`searchs/${searchId}`)
+    .then(response => {
+      setTasks(response.data)
+     
+    })
+  }
+
+
+  useEffect(() => {
+    loadTasks();
+  }, [])
+
+
     return (
     <S.Container>
       <Header/>
@@ -20,24 +49,21 @@ function HomeComp() {
       </S.Title>
       <S.GenArea>
         <S.SearchArea>
-          <SearchItem/>
-          <SearchItem/>
-          <SearchItem/>
-          <SearchItem/>
+          {
+          tasks.map(t => (
+        <SearchItem material={t.Material.name} quantity={t.quantity} deleteSearch={t} />
+         ))
+          }
         </S.SearchArea>
           
         <S.AddSearch>
-          <a href = "#" id = "addSearch">
+          <Link to = "/homecomp/taskcomp">
             <img src={addSearch} alt="Adicionar Busca"/>
-          </a>
+          </Link>
           <h2>Adicionar </h2>
         </S.AddSearch>
       
-      </S.GenArea>
-  
-      
-        
-      
+      </S.GenArea>     
       <Footer/>
     </S.Container>
     

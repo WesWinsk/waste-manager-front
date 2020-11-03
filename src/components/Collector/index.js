@@ -3,16 +3,17 @@ import * as S from './styles'
 
 import info from '../../Assets/info.png';
 
-function Collector() {
+function Collector( { material, status, qttotal, qtact, description} ) {
   return (
     <S.Container>
       
-        <S.Tittle>Coletor 001<a href = "#" id = "info">
+        <S.Tittle>Discard<a href = "#" id = "info">
             <img src={info} alt="Informações"/>
         </a></S.Tittle>       
-        <S.ShortInfoMat>Material: Cobre</S.ShortInfoMat>
-        <S.ShortInfoStats>Status: Rebarba Pura</S.ShortInfoStats>
-        <S.nivelCap>20%</S.nivelCap>
+        <S.ShortInfoMat><b>Material:</b> {material}</S.ShortInfoMat>
+        <S.ShortInfoStats><b>Status:</b> {status}</S.ShortInfoStats>
+        <S.nivelCap>{qtact*100/qttotal}%</S.nivelCap>
+        
         
     </S.Container>
   )

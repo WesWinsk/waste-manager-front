@@ -32,8 +32,7 @@ export const Title = styled.div`
 `
 
 export const InputArea = styled.div`
-
-    
+  
     align-content: center;
     padding:20px 180px;
     
@@ -52,6 +51,13 @@ export const Input = styled.div`
         font-weight: bold;
         padding: 5px;
     }
+
+    select {
+        height: 25px;
+        color: #171253;
+        font-weight: bold;
+    
+    }
 `
 
 export const TextArea = styled.div`
@@ -67,6 +73,24 @@ export const TextArea = styled.div`
     }
 `
 
+export const OptionArea = styled.div`
+    h3{
+        color: #171253;
+        font-size: 21px;
+        font-weight:bold;
+        margin-left:5px;
+    }
+` 
+
+export const Options = styled.div`
+    margin-top: 0px;
+    padding: 0px 5px;
+    span{
+        color: #171253;
+        font-size: 17px;
+        padding: 5px;
+    }
+`
 
 
 export const ButtomArea= styled.div`
@@ -76,6 +100,13 @@ export const ButtomArea= styled.div`
     display: flex;
     justify-content: space-around;
     
+    a{
+        text-decoration: none;
+        color: #FFF;
+        &:hover{
+            color: #171253;
+        }
+    }
     
 
     button{

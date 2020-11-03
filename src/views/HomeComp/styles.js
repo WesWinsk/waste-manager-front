@@ -34,6 +34,7 @@ export const GenArea = styled.div`
 `
 
 export const SearchArea = styled.div`
+    
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -47,17 +48,17 @@ export const AddSearch = styled.div`
 
 
     width: 100%;
-   
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     
 
     img{
-        
+        margin-top: 10px;
         margin-left: 150px;
         width: 120px ;
-        height: 120px ;
+        height: 110px ;
         &:hover{
             opacity: 0.5;
         }

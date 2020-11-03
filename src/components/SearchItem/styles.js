@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 
-    width: 400px;
+    width: 480px;
     height: 70px;
     background: #FFF;
     box-shadow: 0px 0px 11px 3px rgba(23,23,138,0.82);
@@ -47,10 +47,13 @@ export const Info = styled.div`
         }
 `
 
-export const Delete = styled.div`
+export const Delete = styled.button`
 
     display: flex;
     align-self: center;
+    background-color: #FFF;
+    border: none;
+
     img{
         
         margin-left: 5px;

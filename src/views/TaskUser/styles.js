@@ -99,15 +99,11 @@ export const ButtomArea= styled.div`
     position: relative;
     display: flex;
     justify-content: space-around;
-
-    a{
+    
+    a {
         text-decoration: none;
         color: #FFF;
-        &:hover{
-            color: #171253;}
     }
-    
-    
 
     button{
         
