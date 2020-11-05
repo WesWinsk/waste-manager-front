@@ -10,23 +10,51 @@ import Footer from '../../components/Footer';
 
 function NoteGer() {
 
+  const [notification, setNotification] = useState([]);
+  const [companyUser, setCompanyUser] = useState ([]);
+ // const [userSearch, setUserCostumer] = useState ([]);
+ // const [materrialSearch, setMaterialSearch] 
   
-  
-    return (
+
+  const idUser= localStorage.getItem('userId');
+
+
+  async function loadNotification(){
+    await api.get(`notifications/${idUser}`)
+    .then(response => {
+      setNotification(response.data);
+    })
+  }
+
+  async function loadCompany(){
+    await api.get(`/users/${idUser}`)
+    .then(response => {
+      setCompanyUser(response.data); 
+    })
+  }
+
+  useEffect(() => {
+    loadNotification();
+    loadCompany();
+  }, [])
+  return (
     <S.Container>
       <Header/>
       <S.Company>
-          <h1>Metalúrgica 01</h1>
+          <h1>{companyUser.map(company => (company.company))}</h1>
       </S.Company>
       <S.Title>
         <h2> Notificações </h2>
       </S.Title>
       <S.NotificArea>
+        {notification.map(notification =>(
           <S.NotifierBox>
-            <h2>Empresa Multimetal Metalúrgica - LTDA apresenta interesse em seu material armazenado. - Aço Inox. </h2>
+            <h2> {notification.Search.User.company} apresenta interesse em seu material: {notification.Search.Material.name}. </h2>
             <button href = "#"> Recusar Pedido </button>
             <button href = "#" > Abrir Negociação </button>
           </S.NotifierBox>
+          ))
+        }
       </S.NotificArea>
       
       <Footer/>

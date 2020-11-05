@@ -21,6 +21,7 @@ const [quantity, setQuantity] = useState('0');
 const [quantityActual, setQuantityActual] = useState('0');
 const [typeId, setTypeId] = useState([]);
 const [description, setDescription] = useState('');
+const [companyUser, setCompanyUser] = useState ([]);
 
 
 const [selectedOptionTruck,setSelectedOptionTruck] = useState('');
@@ -39,14 +40,22 @@ function loadMaterials() {
   })
 }
 
+
 async function loadTypes() {
   await api.get(`/types`)
     .then(response => {
       setTypes(response.data);
     })
 
-  }
+}
 
+async function loadCompany(){
+  await api.get(`/users/${idUser}`)
+  .then(response => {
+    setCompanyUser(response.data); 
+  })
+}
+  
 function handleSelectMaterial(id){
     setMaterialId(id);
     
@@ -82,7 +91,7 @@ async function Save(){
 useEffect(() => {    
   loadMaterials();
   loadTypes();
-  
+  loadCompany();
   
 }, [])
 
@@ -90,7 +99,7 @@ return (
   <S.Container>
     <Header />
     <S.Company>
-      <h1>Metalúrgica 01</h1>
+      <h1>{companyUser.map(comp => (comp.company))}</h1>
     </S.Company>
     <S.Title>
       <h2> Novo Ponto de Descarte </h2>

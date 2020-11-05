@@ -9,15 +9,32 @@ import Footer from '../../components/Footer';
 
 
 
+
 function NoteGer() {
 
-  
+  const [companyUser, setCompanyUser] = useState ([]);
+
+  const idUser= localStorage.getItem('userId');
+
+  async function loadCompany(){
+    await api.get(`/users/${idUser}`)
+    .then(response => {
+      setCompanyUser(response.data); 
+    })
+  }
+
+  useEffect(() => {
+
+       loadCompany();
+       
+     }, [])
+
   
     return (
     <S.Container>
       <Header/>
       <S.Company>
-          <h1>Metalúrgica 01</h1>
+          <h1>{companyUser.map(comp => (comp.company))}</h1>
       </S.Company>
       <S.Title>
         <h2> Notificações </h2>

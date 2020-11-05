@@ -12,6 +12,7 @@ import addSearch from '../../Assets/AddSearch.png'
 
 function HomeComp() {
   const [tasks, setTasks] = useState([]);
+  const [companyUser, setCompanyUser] = useState ([]);
 
   const idUser= localStorage.getItem('userId');
 
@@ -24,17 +25,25 @@ function HomeComp() {
     })
   }
 
+  async function loadCompany(){
+    await api.get(`/users/${idUser}`)
+    .then(response => {
+      setCompanyUser(response.data); 
+    })
+  }
+
   async function deleteSearch(searchId){
     await api.delete(`searchs/${searchId}`)
     .then(response => {
       setTasks(response.data)
-     
+    
     })
   }
 
 
   useEffect(() => {
     loadTasks();
+    loadCompany();
   }, [])
 
 
@@ -42,7 +51,7 @@ function HomeComp() {
     <S.Container>
       <Header/>
       <S.Company>
-        <h1>Metalúrgica 02</h1>
+        <h1>{companyUser.map(comp => (comp.company))}</h1>
       </S.Company>
       <S.Title>
         <h2> Minhas Buscas </h2>

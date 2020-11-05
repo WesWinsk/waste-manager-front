@@ -19,11 +19,22 @@ function TaskComp(userId) {
   const [type, setType] =useState ([]);
   const [find, setFind] = useState ([false]);
 
+  const [companyUser, setCompanyUser] = useState ([]);
+
+  const idUser= localStorage.getItem('userId');
+
   async function loadMaterials(){
     await api.get(`/materials`)
       .then(response => {
        setMaterials(response.data); 
       })
+  }
+
+  async function loadCompany(){
+    await api.get(`/users/${idUser}`)
+    .then(response => {
+      setCompanyUser(response.data); 
+    })
   }
 
   async function Save(){
@@ -50,6 +61,7 @@ function TaskComp(userId) {
     // loadUserData();    
        loadMaterials();
        loadTypes();
+       loadCompany();
        
      }, [])
 
@@ -57,7 +69,7 @@ function TaskComp(userId) {
   <S.Container>
     <Header/>
     <S.Company>
-      <h1>Metalúrgica 01</h1>
+      <h1>{companyUser.map(comp => (comp.company))}</h1>
     </S.Company>
     <S.Title>
      <h2> Nova Busca de Material</h2>

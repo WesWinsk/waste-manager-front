@@ -18,6 +18,7 @@ function HomeGer() {
   const [tasks, setTasks] = useState([]);
   const [notifyCount, setNotifyCount] = useState([]);
   const [userId, setUserID] = useState (0);
+  const [companyUser, setCompanyUser] = useState ([]);
 
   
   
@@ -34,10 +35,17 @@ function HomeGer() {
     })
   }
 
+  async function loadCompany(){
+    await api.get(`/users/${idUser}`)
+    .then(response => {
+      setCompanyUser(response.data); 
+    })
+  }
+
 
   //verificando as notificações 
    async function notifyVerify(){
-      await api.get(`/notifications`)
+      await api.get(`/notifications/${idUser}`)
       .then(response => {
         setNotifyCount(response.data.length); 
       })
@@ -48,6 +56,7 @@ function HomeGer() {
     // loadUserData();    
     loadTasks();
     notifyVerify();
+    loadCompany();
   }, [])
 
 /**vai pra dentro do return
@@ -62,7 +71,7 @@ function HomeGer() {
   <S.Container>
     <Header notifyCount={notifyCount}/>
     <S.Company>
-        <h1>Metalúrgica 01</h1>
+      <h1>{companyUser.map(comp => (comp.company))}</h1>
     </S.Company>
     <S.Title>
       <h2> Pontos de Descarte </h2>
