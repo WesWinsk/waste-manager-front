@@ -42,7 +42,7 @@ export const NotificArea = styled.div`
 export const NotifierBox = styled.div`
 
     width: 80%;
-    height: 140px;
+    height: 160px;
     background: #FFF;
     box-shadow: 0px 0px 11px 3px rgba(23,23,138,0.82);
     border-radius: 10px;

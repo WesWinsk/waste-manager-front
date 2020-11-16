@@ -26,18 +26,21 @@ export const Tittle = styled.div `
     padding-bottom: 20px;
     align-self: center;
     border-radius: 10px;
-    #info{
+    a{
         
+
         
         img {
-            width: 13px;
-            height: 13px;
+            width: 20px;
+            height: 20px;
             padding-left: 10px;        
         }
 
         &:hover{
             opacity: 0.5;
         }
+
+        
     }
 `
 
@@ -64,14 +67,22 @@ export const ShortInfoStats = styled.div `
 
 export const nivelCap = styled.div `
     
-    width: 120px;
+    
+    width: 130px;
     height: 120px;
     background: #FFF;
-    align-self: center ;
     padding-top: 10px;
-    
-    
+    display:flex;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    border-radius: 10px;
    
+    h3{
+        
+        color: #171253;
+        margin: 2px;
+        font-size: 17px;
+    }
 `
 
 export const nivelCap2 = styled.div `

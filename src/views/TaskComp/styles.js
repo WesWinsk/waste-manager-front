@@ -53,10 +53,14 @@ export const Input = styled.div`
     }
 
     select {
-        height: 25px;
+        height: px;
         color: #171253;
         font-weight: bold;
     
+    }
+
+    Select {
+        font-size: 15px;
     }
 `
 
@@ -90,6 +94,7 @@ export const Options = styled.div`
         font-size: 17px;
         padding: 5px;
     }
+    
 `
 
 
@@ -99,6 +104,7 @@ export const ButtomArea= styled.div`
     width:100%;
     display: flex;
     justify-content: space-around;
+    
     
     a{
         text-decoration: none;

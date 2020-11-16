@@ -22,27 +22,29 @@ const [quantityActual, setQuantityActual] = useState('0');
 const [typeId, setTypeId] = useState([]);
 const [description, setDescription] = useState('');
 const [companyUser, setCompanyUser] = useState ([]);
+const [price, setPrice] = useState('0');
+const [selectedOptionTruck,setSelectedOptionTruck] = useState({});
 
+const [selectedMaterial, setSelectedMaterial] = useState(0);
+const [selectedType, setSelectedType] = useState(0);
 
-const [selectedOptionTruck,setSelectedOptionTruck] = useState('');
+const [selectedTypeTruck, setSelectedTypeTruck] = useState([]);
+
 
 const idUser= localStorage.getItem('userId');
 
-const formatedMaterials = [];
+
 
 function loadMaterials() {
- api.get(`/materials`)
+ api.get(`/materialslist`)
   .then(response => {
     setMaterials(response.data);
-    materials.map( material => formatedMaterials.push({ value: material.id , label: material.name }) );
-    setMaterialId(formatedMaterials);
     
   })
 }
 
-
 async function loadTypes() {
-  await api.get(`/types`)
+  await api.get(`/typeslist`)
     .then(response => {
       setTypes(response.data);
     })
@@ -57,34 +59,41 @@ async function loadCompany(){
 }
   
 function handleSelectMaterial(id){
-    setMaterialId(id);
-    
+    setMaterialId(id)
 }
 
-//
-const optionsTruck = [
-  { value: 'IXS9299', label: 'IXS9299' },
-  { value: 'IYL1413', label: 'IYL1413' },
-  { value: 'ABC1A33', label: 'ABC1A33' },
-];
+function handleSelectType(id){
+  setTypeId(id)
+}
 
-function handleSelectedTruck(selectedOptionTruck){        
-  setSelectedOptionTruck({ selectedOptionTruck });
- 
+//materials 
+function handleSelectedTruck(materialsList){        
+  console.log(materialsList);
+  //setSelectedOptionTruck({id: materialsList[0].value});
+  //console.log(materialsList[0].value);
+  console.log(selectedOptionTruck);
 };
 
+function handleSelectedTypesTruck(typesList){
+  setSelectedTypeTruck(typesList);
+  console.log(selectedTypeTruck);
+}
 
 
 async function Save(){
   await api.post('/discards', {
     user_id: idUser,
-    material_id: materialId,
+    material_id: selectedMaterial,
     max_cap: quantity,
     curr_quant: quantityActual,
     description,
-    type_id: typeId
-  }).then(
+    Type_id: selectedType,
+    price
+  }).then(response => 
+    {
     alert('Pondo de Descarte Cadastrado')
+    console.log(response.data);
+    }
   )
 }
 
@@ -108,10 +117,15 @@ return (
       <S.Input>
         <span>Material </span>
 
-        <Select options={materialId} value={selectedOptionTruck.label} 
-        onChange={handleSelectedTruck} />
+        <Select 
+          options={materials} 
+          onChange={(values) => {setSelectedMaterial(values[0].value); 
+          console.log(values[0].value)
+          console.log(selectedMaterial)
+        }}
+        />
 
-        <span>Quantidade Total</span>
+        <span>Capacidade Total</span>
         <input type="number" placeholder="Quantidade em Kg" 
         onChange={e=>setQuantity(e.target.value)} value={quantity}></input>
 
@@ -119,12 +133,17 @@ return (
         <input type="number" placeholder="Quantidade em Kg" 
         onChange={e=>setQuantityActual(e.target.value)} value={quantityActual}></input>
         
+        <span>Preço de Negociação(BRL)</span>
+        <input type="decimal" placeholder="Preço de negociação" 
+        onChange={e=>setPrice(e.target.value)} value={price}></input>
+
         <span>Estado do Material</span>
         
-        <select >{types.map(typ => (
-          <option key={typ.id} value={typ.id} > {typ.name}</option>
-        ))}
-        </select>
+        <Select options={types} 
+          onChange={ (values) => {
+          setSelectedType(values[0].value)
+          }
+        } />
       </S.Input>
 
       <S.TextArea>
@@ -135,7 +154,7 @@ return (
     </S.InputArea>
     <S.ButtomArea>
       <button><Link to="/homeger">Cancelar</Link></button>
-      <button><Link to="/homeger" onClick={() => console.log(materialId)}>Salvar</Link></button>
+      <button><Link to="/homeger" onClick={() => Save()}>Salvar</Link></button>
     </S.ButtomArea>
     <Footer />
   </S.Container>

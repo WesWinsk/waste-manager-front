@@ -19,8 +19,6 @@ function HomeGer() {
   const [notifyCount, setNotifyCount] = useState([]);
   const [userId, setUserID] = useState (0);
   const [companyUser, setCompanyUser] = useState ([]);
-
-  
   
 
   const idUser= localStorage.getItem('userId');
@@ -59,14 +57,6 @@ function HomeGer() {
     loadCompany();
   }, [])
 
-/**vai pra dentro do return
-  
-  <S.Company>
-       user.map(t => (
-        <h1>t.User.company</h1>
-        ))
-   </S.Company>
-*/
   return (
   <S.Container>
     <Header notifyCount={notifyCount}/>
@@ -81,10 +71,12 @@ function HomeGer() {
         {
           tasks.map(t => (
           <Collector 
-          material={t.Material.name} 
-          status={t.Material.state} 
-          qttotal={t.max_cap} 
-          qtact={t.curr_quant}  />
+            key={t.id}
+            id={t.id}
+            material={t.Material.name} 
+            status={t.Type.name} 
+            qttotal={t.max_cap} 
+            qtact={t.curr_quant}  />
           ))
         }
       </S.CollectorArea>     

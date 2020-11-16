@@ -3,18 +3,28 @@ import * as S from './styles';
 import api from '../../services/api';
 
 //NOSSOS COMPONENTES
-import Header from '../../components/Header';
+
 import Footer from '../../components/Footer';
+import HeaderComp from '../../components/HeaderComp';
 
 
 
 
 
-function NoteGer() {
+function NoteComp() {
 
+  const [notification, setNotification] = useState([]);
   const [companyUser, setCompanyUser] = useState ([]);
+  const [providerCompany, setProviderCompany] = useState();
 
   const idUser= localStorage.getItem('userId');
+
+  async function loadNotification(){
+    await api.get(`notifications/${idUser}`)
+    .then(response => {
+      setNotification(response.data);
+    })
+  }
 
   async function loadCompany(){
     await api.get(`/users/${idUser}`)
@@ -23,16 +33,38 @@ function NoteGer() {
     })
   }
 
+
+  async function createProviderNotification(providerUser, search_id){
+    await api.post(`/notification`,{
+      user_id: providerUser,
+      search_id,
+      messege: "teste messege",
+      accepted: false
+    }).then()
+  }
+
+  async function loadProviderDiscard(material_id, type_id, curr_quant){
+    await api.post(`notifications/discardinfo`,{
+      material_id,
+      type_id,
+      curr_quant
+    }).then (response => {
+      setProviderCompany(response.data.user_id)
+    });
+    }
+  
+
   useEffect(() => {
 
        loadCompany();
+       loadNotification();
        
      }, [])
 
   
     return (
     <S.Container>
-      <Header/>
+      <HeaderComp/>
       <S.Company>
           <h1>{companyUser.map(comp => (comp.company))}</h1>
       </S.Company>
@@ -40,14 +72,13 @@ function NoteGer() {
         <h2> Notificações </h2>
       </S.Title>
       <S.NotificArea>
+      {notification.map(notification =>(
           <S.NotifierBox>
-            <h2>Empresa Multimetal Metalúrgica - LTDA apresenta materiais que condizem com sua busca. - Aço Prata </h2>
-            <button> Remover Notificação </button>
-            <button> Notificar Empresa </button>
+            <button href = "#"> Remover Notificação </button>
+            <button href = "#" > Notificar Empresa </button>
           </S.NotifierBox>
-          
-
-
+          ))
+        }
       </S.NotificArea>
       
       <Footer/>
@@ -55,4 +86,4 @@ function NoteGer() {
     
     )
   }
-  export default NoteGer;
+  export default NoteComp;

@@ -4,72 +4,81 @@ import api from '../../services/api';
 import {Link} from 'react-router-dom';
 
 //NOSSOS COMPONENTES
-import Header from '../../components/Header';
+import HeaderComp from '../../components/HeaderComp';
 import Footer from '../../components/Footer';
 import SearchItem from '../../components/SearchItem';
 
 import addSearch from '../../Assets/AddSearch.png'
 
 function HomeComp() {
-  const [tasks, setTasks] = useState([]);
+
+  const [search, setSearch] = useState([]);
   const [companyUser, setCompanyUser] = useState ([]);
-
+  const [notifyCount, setNotifyCount] = useState([]);
+ 
   const idUser= localStorage.getItem('userId');
-
-
-  async function loadTasks(){
-    await api.get(`/searchs/${idUser}` )
-    .then(response => {
-      setTasks(response.data)
-     
-    })
-  }
-
+ 
+ 
+  //carrega companhia do usuário
   async function loadCompany(){
     await api.get(`/users/${idUser}`)
     .then(response => {
       setCompanyUser(response.data); 
     })
   }
+  
+  //carrega todas as buscas e prepara o ambiente para cada uma dela
+  async function loadSearchs(){
+    await api.get(`/searchs/${idUser}` )
+    .then(response => {
+      setSearch(response.data);     
+    })
+  }
+
 
   async function deleteSearch(searchId){
     await api.delete(`searchs/${searchId}`)
     .then(response => {
-      setTasks(response.data)
-    
+      setSearch(response.data)
     })
   }
 
 
   useEffect(() => {
-    loadTasks();
     loadCompany();
-  }, [])
-
+    loadSearchs();
+    
+    }, [])
 
     return (
     <S.Container>
-      <Header/>
+      <HeaderComp notifyCount={notifyCount} />
       <S.Company>
-        <h1>{companyUser.map(comp => (comp.company))}</h1>
+        <h1>{companyUser.map(comp => (comp.company))}</h1>     
       </S.Company>
       <S.Title>
         <h2> Minhas Buscas </h2>
       </S.Title>
       <S.GenArea>
-        <S.SearchArea>
+        <S.SearchArea>          
           {
-          tasks.map(t => (
-        <SearchItem material={t.Material.name} quantity={t.quantity} deleteSearch={t} />
+            search.map(search => (             
+             <SearchItem 
+              key={search.id} 
+              id={search.id}             
+              material={search.Material.name} 
+              quantity={search.quantity}    
+              userId= {idUser}          
+              />           
          ))
           }
-        </S.SearchArea>
-          
+
+        </S.SearchArea>        
         <S.AddSearch>
           <Link to = "/homecomp/taskcomp">
-            <img src={addSearch} alt="Adicionar Busca"/>
+            <img src={addSearch} alt="Adicionar Busca"/>            
           </Link>
-          <h2>Adicionar </h2>
+            <h2>Adicionar </h2>
         </S.AddSearch>
       
       </S.GenArea>     

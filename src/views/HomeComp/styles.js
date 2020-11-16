@@ -31,13 +31,16 @@ export const Title = styled.div`
 export const GenArea = styled.div`
     width: 100%;
     display: flex;
+    margin-bottom: 70px;
 `
 
 export const SearchArea = styled.div`
     
     width: 100%;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     margin-top: 50px;
 
@@ -47,6 +50,24 @@ export const SearchArea = styled.div`
 export const AddSearch = styled.div`
 
 
+margin-right: 50px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2{
+        margin-left: 10px;
+        justify-content: center;
+        color: #171253;
+    }
+
+    img{
+        &:hover{
+            opacity: 0.5;
+        }
+    }
+/*
     width: 100%;
     padding-top: 40px;
     display: flex;
@@ -69,4 +90,6 @@ export const AddSearch = styled.div`
         width: 150px;
         height: 75px;
     }
+
+   */ 
 `

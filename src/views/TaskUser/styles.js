@@ -45,6 +45,7 @@ export const Input = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column; 
+    margin-bottom: 30px;
     
     span{
         color: #171253;
@@ -72,6 +73,8 @@ export const TextArea = styled.div`
         font-weight: bold;
         padding: 5px;
     }
+
+    
 `
 
 export const OptionArea = styled.div`

@@ -6,10 +6,15 @@ export const Container = styled.div`
     width: 480px;
     height: 70px;
     background: #FFF;
+    padding: 10px;
     box-shadow: 0px 0px 11px 3px rgba(23,23,138,0.82);
     border-radius: 10px;
-    display: flex; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
     margin:10px;
+
+    
 
 `
 
@@ -56,8 +61,7 @@ export const Delete = styled.button`
 
     img{
         
-        margin-left: 5px;
-        margin-right: 10px;
+        
         width: 38px;
         height: 38px;
     }

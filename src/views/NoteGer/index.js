@@ -12,8 +12,7 @@ function NoteGer() {
 
   const [notification, setNotification] = useState([]);
   const [companyUser, setCompanyUser] = useState ([]);
- // const [userSearch, setUserCostumer] = useState ([]);
- // const [materrialSearch, setMaterialSearch] 
+ 
   
 
   const idUser= localStorage.getItem('userId');
